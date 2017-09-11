@@ -177,7 +177,7 @@
 <script src="{{asset('assets/js/jquery.app.js')}}"></script>
 <script src="{{asset('assets/js/underscore.js')}}"></script>
 
-<script type="text/javascript" src="{{asset('assets/plugins/bootstrap-validator/dist/validator.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/js/validator.js')}}"></script>
 
 @stack('script')
 

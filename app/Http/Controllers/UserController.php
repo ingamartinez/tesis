@@ -57,16 +57,16 @@ class UserController extends Controller
             'radio_rol' => 'bail|required',
         ]);
 
-//        $user = new User();
-//        $user->name = $request->name;
-//        $user->email = $request->email;
-//        $user->password = $request->password;
-//
-//        $user->save();
-//
-//        $user->attachRole(\HttpOz\Roles\Models\Role::findBySlug($request->radio_rol));
-//
-//        return redirect()->back();
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+
+        $user->save();
+
+        $user->attachRole(\HttpOz\Roles\Models\Role::findBySlug($request->radio_rol));
+
+        return redirect()->back();
 
     }
 
