@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -91,7 +91,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -182,6 +182,11 @@ return [
          */
         HttpOz\Roles\RolesServiceProvider::class,
 
+        /*
+         * Caffeinated Flash Messages
+         */
+        Caffeinated\Flash\FlashServiceProvider::class,
+
     ],
 
     /*
@@ -230,6 +235,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /*
+         * Caffeinated Flash Messages
+         */
+        'Flash' => Caffeinated\Flash\Facades\Flash::class,
 
     ],
 

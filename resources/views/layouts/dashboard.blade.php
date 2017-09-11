@@ -10,7 +10,7 @@
 
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
 
-    <title>Sensor App | @yield('titulo')</title>
+    <title>@yield('titulo') - Sensor App</title>
 
     <!--Morris Chart CSS -->
     <link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
@@ -49,7 +49,9 @@
 
         <!-- LOGO -->
         <div class="topbar-left">
-            <a href="index.html" class="logo"><span>Admin<span>to</span></span><i class="zmdi zmdi-layers"></i></a>
+            <a href="index.html" class="logo">
+                <img style="padding: 10px" src="http://idi.unisinucartagena.edu.co:8000/cuenta-facil/public/images/LogoUnisinu.png" alt="" class="img-responsive">
+            </a>
         </div>
 
         <!-- Button mobile view to collapse sidebar menu -->
@@ -80,10 +82,10 @@
             <!-- User -->
             <div class="user-box">
                 <div class="user-img">
-                    <img src="assets/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" class="img-circle img-thumbnail img-responsive">
+                    <img src="https://cdn0.iconfinder.com/data/icons/superuser-web-kit/512/686909-user_people_man_human_head_person-512.png" alt="user-img" title="Mat Helme" class="img-circle img-thumbnail img-responsive">
                     <div class="user-status online"><i class="zmdi zmdi-dot-circle"></i></div>
                 </div>
-                <h5><a href="#">Mat Helme</a> </h5>
+                <h5><a href="#">{{Auth::user()->name}}</a> </h5>
                 <ul class="list-inline">
                     <li>
                         <a href="#" >
@@ -92,7 +94,7 @@
                     </li>
 
                     <li>
-                        <a href="#" class="text-custom">
+                        <a href="{{url('logout')}}" class="text-custom">
                             <i class="zmdi zmdi-power"></i>
                         </a>
                     </li>

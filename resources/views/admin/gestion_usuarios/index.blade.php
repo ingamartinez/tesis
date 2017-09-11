@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Gestión de usuarios')
+@section('titulo', 'Gestión de usuarios')
 
 @section('content')
     <div class="row">
@@ -19,7 +19,7 @@
                     </ul>
                 </div>
 
-                <button class="btn btn-primary waves-effect waves-light btn-lg m-b-5" data-toggle="modal" data-target="#con-close-modal">Agregar Usuario</button>
+                <button class="btn btn-primary waves-effect waves-light btn-lg m-b-5" data-toggle="modal" data-target="#modal_agregar_usuario">Agregar Usuario</button>
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -45,7 +45,7 @@
 
                     <tbody>
                     @foreach($users as $user)
-                        <tr>
+                        <tr data-id="{{$user->id}}">
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
                             <td>
@@ -71,13 +71,60 @@
 @endsection
 
 @section('modals')
-    @include('modals.agregar_usuario')
+    @include('admin.gestion_usuarios.includes.modal_agregar_usuario')
+    @include('admin.gestion_usuarios.includes.modal_editar_usuario')
 @endsection
 
 @push('script')
 <script>
     $(document).ready(function() {
-        $('#datatable').DataTable();
+        $('#datatable').DataTable({
+            "language": {
+                "url": "{{asset('assets/js/Spanish.json')}}"
+            }
+        });
     });
+
+    $('.editar').on('click', function (e) {
+        e.preventDefault();
+        var fila = $(this).parents('tr');
+        var id = fila.data('id');
+        $.ajax({
+            type: 'GET',
+            url: '{{url('gestion-usuarios')}}/' + id,
+            success: function (data) {
+
+                console.log(data);
+
+                $('#modal_editar_usuario_id').val(data.id);
+                $('#modal-editar-iglesia-nombre').val(data.nombre);
+                $('#modal-editar-iglesia-ciudad').val(data.ciudad);
+                $('#modal-editar-iglesia-direccion').val(data.direccion);
+                $('#modal-editar-iglesia-email').val(data.email);
+                $('#modal-editar-iglesia-suscripcion').val(data.suscripcion);
+
+//                $('input:radio[name=estado][value='+data.estado+']').iCheck('check');
+
+                $("#modal_editar_usuario").modal('toggle');
+            }
+        });
+    });
+
+
+    $('#form_editar_usuario').on('submit', function (e) {
+        e.preventDefault();
+        var id=$("#modal-editar-iglesia-id").val();
+
+        $.ajax({
+            type: 'PUT',
+            url: 'actualizarIglesia/'+id,
+            data: $('#edicionIglesia').serialize(),
+            success: function(){
+                console.log(id);
+                location.reload();
+            }
+        });
+    });
+
 </script>
 @endpush

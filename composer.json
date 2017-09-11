@@ -6,6 +6,8 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "caffeinated/flash": "^3.0",
+        "caouecs/laravel-lang": "~3.0",
         "fideloper/proxy": "~3.3",
         "httpoz/roles": "^2.2",
         "laravel/framework": "5.5.*",

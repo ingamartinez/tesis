@@ -1,14 +1,16 @@
-<div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div id="modal_editar_usuario" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Formulario Agregar Usuario</h4>
+                <h4 class="modal-title">Formulario Editar Usuario</h4>
             </div>
 
-            <form action="{{route('usuario.store')}}" method="POST" autocomplete="off" id="form">
+            <form action="{{route('usuario.store')}}" method="POST" autocomplete="off" id="form_editar_usuario">
                 {{method_field('POST')}}
                 {{csrf_field()}}
+
+                <input type="hidden" id="modal_editar_usuario_id" value="">
 
                 <div class="modal-body">
                     <div class="row">
@@ -67,11 +69,9 @@
 </div><!-- /.modal -->
 
 @push('script')
-
-
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#form').validator();
+            $('#form_editar_usuario').validator();
         });
     </script>
 

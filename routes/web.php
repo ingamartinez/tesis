@@ -11,11 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.dashboard');
-});
 
-Route::post('validar-usuario','UserController@validar')->name('usuario.validar');
-Route::resource('gestion-usuarios','UserController',['names'=>[
-    'store' => 'usuario.store'
-]]);
+Route::get('logout','LoginController@logout');
+Route::resource('login','LoginController');
+
+Route::middleware(['role:admin','auth'])->group(function () {
+    Route::get('/', function () {
+        return view('layouts.dashboard');
+    });
+
+    Route::post('validar-usuario','UserController@validar')->name('usuario.validar');
+    Route::resource('gestion-usuarios','UserController',['names'=>[
+        'store' => 'usuario.store',
+        'show' => 'usuario.show',
+        'update' => 'usuario.update',
+        'delete' => 'usuario.delete'
+    ]]);
+
+});
