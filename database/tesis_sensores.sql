@@ -1,16 +1,16 @@
 /*
 Navicat MariaDB Data Transfer
 
-Source Server         : localhost
-Source Server Version : 100125
+Source Server         : Localhost
+Source Server Version : 100121
 Source Host           : localhost:3306
 Source Database       : tesis_sensores
 
 Target Server Type    : MariaDB
-Target Server Version : 100125
+Target Server Version : 100121
 File Encoding         : 65001
 
-Date: 2017-09-11 01:21:37
+Date: 2017-09-11 17:19:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -112,5 +112,5 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'Alejandro Martinez', 'ing.amartinez94@hotmail.com', '123', null, '2017-09-11 00:12:13', '2017-09-11 00:12:13');
+INSERT INTO `users` VALUES ('1', 'Alejandro Martinez', 'lider@lider.com', '602bdc204140db016bee5374895e5568ce422fabe17e064061d80097', 'dLwn8qHOBZSF55dkJy4tPlbWPgk4WfEXHBAmamj1zRnxNrG3n4t5dWdETOfY', '2017-09-11 00:12:13', '2017-09-11 00:12:13');
 SET FOREIGN_KEY_CHECKS=1;
