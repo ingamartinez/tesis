@@ -97,13 +97,13 @@
                 console.log(data);
 
                 $('#modal_editar_usuario_id').val(data.id);
-                $('#modal-editar-iglesia-nombre').val(data.nombre);
-                $('#modal-editar-iglesia-ciudad').val(data.ciudad);
-                $('#modal-editar-iglesia-direccion').val(data.direccion);
-                $('#modal-editar-iglesia-email').val(data.email);
-                $('#modal-editar-iglesia-suscripcion').val(data.suscripcion);
+                $('#modal_editar_usuario_name').val(data.name);
+                $('#modal_editar_usuario_email').val(data.email);
+                {{--$('#modal_editar_usuario_email').attr('data-remote','{{url('usuario/')}}'+id);--}}
 
-//                $('input:radio[name=estado][value='+data.estado+']').iCheck('check');
+
+
+                $('input:radio[name=radio_rol][value='+_.first(data.roles).slug+']').attr('checked', 'checked');
 
                 $("#modal_editar_usuario").modal('toggle');
             }

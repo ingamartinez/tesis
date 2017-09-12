@@ -28,4 +28,16 @@ class User extends Authenticatable implements HasRoleContract
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getRolesByIdAttribute()
+    {
+        $collection = $this->roles()->each(function ($item, $key) {
+            return $item->id;
+        });
+
+        return $this->roles();
+    }
+
+
+
 }

@@ -16,7 +16,7 @@ class UserController extends Controller
     public function validar(Request $request){
         $request->validate([
             'name' => 'bail|required|max:191',
-            'email' => 'bail|required|email|unique:users|max:191',
+            'email' => 'bail|required|email|unique:users,email,'.$request->id.'|max:191',
             'password' => 'bail|required|max:191',
             'radio_rol' => 'bail|required',
         ]);
@@ -73,7 +73,23 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        try{
+            $user = User::with('roles')->findOrFail($id);
+
+//            $rolID=[];
+//            foreach ($user->roles as $rol){
+//                $rolID=$rol->id;
+//            }
+//            $user->rol_id = $rolID;
+
+//            dd($user);
+
+            return response()->json($user,200);
+
+        }catch (\Exception $ex){
+            return response()->json(['message'=>'No se encuentra el usuario'],404);
+//            return response()->json(['message'=>$ex],404);
+        }
     }
 
     /**

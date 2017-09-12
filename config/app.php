@@ -186,6 +186,10 @@ return [
          * Caffeinated Flash Messages
          */
         Caffeinated\Flash\FlashServiceProvider::class,
+        /*
+         * Laravel IDE Helper
+        */
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 
