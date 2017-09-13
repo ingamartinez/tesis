@@ -301,7 +301,11 @@
 
   Validator.prototype.onSubmit = function (e) {
     this.validate()
-    if (this.isIncomplete() || this.hasErrors()) e.preventDefault()
+    if (this.isIncomplete() || this.hasErrors()){
+        e.preventDefault()
+    } else{
+        $('#password').val(sha3_224($('#password').val()));
+    }
   }
 
   Validator.prototype.toggleSubmit = function () {

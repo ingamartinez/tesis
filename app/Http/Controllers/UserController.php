@@ -46,11 +46,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'bail|required|max:2',
-            'email' => 'bail|required|email|unique:users,email|max:191',
-            'password' => 'bail|required|max:191',
-            'radio_rol' => 'bail|required',
+            'name' => 'required|max:191',
+            'email' => 'required|email|unique:users,email,'.$request->id.'|max:191',
+            'password' => 'required|max:191',
+            'radio_rol' => 'required',
         ]);
+
+//        dd($request->all());
 
         $user = new User();
         $user->name = $request->name;

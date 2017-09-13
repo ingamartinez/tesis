@@ -86,6 +86,9 @@
     });
 
     $('.editar').on('click', function (e) {
+
+        $('#form_editar_usuario input:radio').prop('checked',false);
+
         e.preventDefault();
         var fila = $(this).parents('tr');
         var id = fila.data('id');
@@ -94,16 +97,15 @@
             url: '{{url('gestion-usuarios')}}/' + id,
             success: function (data) {
 
-                console.log(data);
+//                console.log(data);
 
                 $('#modal_editar_usuario_id').val(data.id);
                 $('#modal_editar_usuario_name').val(data.name);
                 $('#modal_editar_usuario_email').val(data.email);
-                {{--$('#modal_editar_usuario_email').attr('data-remote','{{url('usuario/')}}'+id);--}}
 
+//                console.log(_.first(data.roles).slug);
 
-
-                $('input:radio[name=radio_rol][value='+_.first(data.roles).slug+']').attr('checked', 'checked');
+                $('input:radio[name=radio_rol][value='+_.first(data.roles).slug+']').prop('checked', true);
 
                 $("#modal_editar_usuario").modal('toggle');
             }

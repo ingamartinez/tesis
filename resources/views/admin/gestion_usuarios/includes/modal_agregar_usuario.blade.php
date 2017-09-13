@@ -28,10 +28,17 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="password" class="control-label">Contraseña</label>
-                                <input type="text" class="form-control" id="password" name="password" placeholder="Ej: 123456" data-remote="{{route('usuario.validar')}}" data-remote-method="POST" required>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Ej: 123456" data-remote="{{route('usuario.validar')}}" data-remote-method="POST" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="password" class="control-label">Confirmar Contraseña</label>
+                                <input type="password" class="form-control" id="password-confirm" placeholder="Ej: 123456" data-remote="{{route('usuario.validar')}}" data-remote-method="POST" data-match="#password" data-match-error="Las contraseñas no coinciden" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
@@ -70,6 +77,13 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#form_agregar_usuario').validator();
+
+//            $('#form_agregar_usuario').on('submit',function (e) {
+//                e.preventDefault();
+//                $('#password').val(sha3_224($('#password').val()));
+//                this.submit();
+//            })
+
         });
     </script>
 

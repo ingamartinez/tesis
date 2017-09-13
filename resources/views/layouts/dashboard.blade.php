@@ -181,6 +181,8 @@
 
 <script type="text/javascript" src="{{asset('assets/js/validator.js')}}"></script>
 
+<script src="{{asset('assets/js/sha3.min.js')}}"></script>
+
 @stack('script')
 
 

@@ -52,7 +52,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-info waves-effect waves-light">Agregar Usuario</button>
+                    <button type="submit" class="btn btn-info waves-effect waves-light">Editar Usuario</button>
                 </div>
             </form>
         </div>
