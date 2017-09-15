@@ -16,7 +16,7 @@ Route::get('logout','LoginController@logout');
 
 Route::resource('login','LoginController');
 
-//Route::middleware(['role:admin','auth'])->group(function () {
+Route::middleware(['role:admin','auth'])->group(function () {
     Route::get('/', function () {
         return view('layouts.dashboard');
     });
@@ -29,4 +29,4 @@ Route::resource('login','LoginController');
         'delete' => 'usuario.delete'
     ]]);
 
-//});
+});
