@@ -31,6 +31,8 @@
                     </div>
                 @endif
 
+                @include('flash::message')
+
                 <table id="datatable" class="table table-striped table-bordered">
                     <thead>
                     <tr>
@@ -86,9 +88,6 @@
     });
 
     $('.editar').on('click', function (e) {
-
-        $('#form_editar_usuario input:radio').prop('checked',false);
-
         e.preventDefault();
         var fila = $(this).parents('tr');
         var id = fila.data('id');
@@ -97,15 +96,11 @@
             url: '{{url('gestion-usuarios')}}/' + id,
             success: function (data) {
 
-//                console.log(data);
-
                 $('#modal_editar_usuario_id').val(data.id);
                 $('#modal_editar_usuario_name').val(data.name);
                 $('#modal_editar_usuario_email').val(data.email);
 
-//                console.log(_.first(data.roles).slug);
-
-                $('input:radio[name=radio_rol][value='+_.first(data.roles).slug+']').prop('checked', true);
+                $('input:radio[name=radio_rol]').val([_.first(data.roles).slug]);
 
                 $("#modal_editar_usuario").modal('toggle');
             }
@@ -114,18 +109,76 @@
 
 
     $('#form_editar_usuario').on('submit', function (e) {
-        e.preventDefault();
-        var id=$("#modal-editar-iglesia-id").val();
+        if (!e.isDefaultPrevented()) {
+            e.preventDefault();
+            var id=$("#modal_editar_usuario_id").val();
+//            console.log(id);
 
-        $.ajax({
-            type: 'PUT',
-            url: 'actualizarIglesia/'+id,
-            data: $('#edicionIglesia').serialize(),
-            success: function(){
-                console.log(id);
-                location.reload();
-            }
+            $.ajax({
+                type: 'PUT',
+                url: '{{url('gestion-usuarios')}}/'+id,
+                data: $('#form_editar_usuario').serialize(),
+                success: function(){
+                    console.log(id);
+                    location.reload();
+                }
+            });
+        }
+    });
+
+    $('.eliminar').on('click', function (e) {
+        e.preventDefault();
+
+        var fila = $(this).parents('tr');
+        var id = fila.data('id');
+
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(function () {
+            $.ajax({
+                type: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '{{url('gestion-usuarios')}}/' + id,
+                success: function (data) {
+                    //$("#modal_editar_usuario").modal('toggle');
+                    swal(
+                        'Eliminado',
+                        'El usuario ha sido eliminado.',
+                        'success'
+                    )
+                    location.reload();
+                },
+                error:function (jqXHR, textStatus, errorThrown) {
+
+//                    var campos = _.pick(jqXHR.responseJSON.errors, $el.attr('name'));
+//                    if (jqXHR.responseJSON.errors[$el.attr('name')]) {
+//                        errors.push(campos[field_name]);
+//                    }
+                    console.log(jqXHR.responseText);
+                    swal(
+                        'Ha ocurrido un error',
+                        jqXHR.responseText,
+                        'warning'
+                    );
+
+                }
+            });
+
+
         });
+
+        //$('#form_editar_usuario input:radio').prop('checked',false);
+
+
+
     });
 
 </script>

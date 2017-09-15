@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Validator;
+use DB;
+use Flash;
 
 class UserController extends Controller
 {
@@ -54,16 +56,30 @@ class UserController extends Controller
 
 //        dd($request->all());
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
+        try{
+            DB::beginTransaction();
 
-        $user->save();
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = $request->password;
 
-        $user->attachRole(\HttpOz\Roles\Models\Role::findBySlug($request->radio_rol));
+            $user->save();
 
-        return redirect()->back();
+            $user->attachRole(\HttpOz\Roles\Models\Role::findBySlug($request->radio_rol));
+
+//            throw new \Exception('No se pudo crear el usuario');
+
+            DB::commit();
+
+            return redirect()->back();
+        }catch (\Exception $ex){
+            DB::rollBack();
+
+            Flash::error('Error al guardar - '.$ex->getMessage());
+
+            return redirect()->back();
+        }
 
     }
 
@@ -114,7 +130,32 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        try{
+            DB::beginTransaction();
+
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->save();
+
+            $roles = \HttpOz\Roles\Models\Role::findBySlug($request->radio_rol);
+            $user->syncRoles($roles);
+
+            DB::commit();
+
+            Flash::success('Usuario editado correctamente');
+
+            return response()->json($user,200);
+
+        }catch (\Exception $ex){
+            DB::rollBack();
+
+            Flash::error('Error al editar - '.$ex->getMessage());
+
+            return response()->json(['message'=>'No se encuentra el usuario'],404);
+        }
+
     }
 
     /**
@@ -125,6 +166,31 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+
+        try{
+            DB::beginTransaction();
+
+            //throw new \Exception('No se pudo crear el usuario');
+
+            $user= User::destroy($id);
+
+            DB::commit();
+
+            Flash::success('Usuario eliminado correctamente');
+
+
+
+            return response()->json($user,200);
+
+        }catch (\Exception $ex){
+            DB::rollBack();
+
+            //Flash::error('Error al editar - '.$ex->getMessage());
+
+            return response()->json('No se puede eliminar el usuario',404);
+        }
+
+
     }
 }

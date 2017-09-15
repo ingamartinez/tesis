@@ -23,6 +23,7 @@
     <link href="{{asset('assets/css/pages.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/menu.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/plugins/bootstrap-sweetalert/sweetalert2.css')}}" rel="stylesheet" type="text/css" />
 
     <!-- App css -->
     <link href="{{asset('assets/plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
@@ -178,6 +179,8 @@
 <script src="{{asset('assets/js/jquery.core.js')}}"></script>
 <script src="{{asset('assets/js/jquery.app.js')}}"></script>
 <script src="{{asset('assets/js/underscore.js')}}"></script>
+
+<script src="{{asset('assets/plugins/bootstrap-sweetalert/sweetalert2.js')}}"></script>
 
 <script type="text/javascript" src="{{asset('assets/js/validator.js')}}"></script>
 

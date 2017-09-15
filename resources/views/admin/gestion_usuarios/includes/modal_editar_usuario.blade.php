@@ -6,8 +6,8 @@
                 <h4 class="modal-title">Formulario Editar Usuario</h4>
             </div>
 
-            <form action="{{route('usuario.store')}}" method="POST" autocomplete="off" id="form_editar_usuario">
-                {{method_field('POST')}}
+            <form method="POST" autocomplete="off" id="form_editar_usuario">
+
                 {{csrf_field()}}
 
                 <input type="hidden" name="id" id="modal_editar_usuario_id" value="">
@@ -35,13 +35,13 @@
                                 <label class="control-label">Escoja un Rol</label>
                                 <div class="radio radio-success">
                                     <input type="radio" name="radio_rol" id="modal_editar_usuario_radio_admin" value="admin" data-remote="{{route('usuario.validar')}}" data-remote-method="POST" required>
-                                    <label for="radio_admin">
+                                    <label for="modal_editar_usuario_radio_admin">
                                         Usuario Administrador
                                     </label>
                                 </div>
                                 <div class="radio radio-info">
                                     <input type="radio" name="radio_rol" id="modal_editar_usuario_radio_usuario" value="user" data-remote="{{route('usuario.validar')}}" data-remote-method="POST" required>
-                                    <label for="radio_usuario">
+                                    <label for="modal_editar_usuario_radio_usuario">
                                         Usuario Normal
                                     </label>
                                 </div>

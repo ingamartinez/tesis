@@ -38,7 +38,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="password" class="control-label">Confirmar Contraseña</label>
-                                <input type="password" class="form-control" id="password-confirm" placeholder="Ej: 123456" data-remote="{{route('usuario.validar')}}" data-remote-method="POST" data-match="#password" data-match-error="Las contraseñas no coinciden" required>
+                                <input type="password" class="form-control" id="password-confirm" placeholder="Ej: 123456" data-match="#password" data-match-error="Las contraseñas no coinciden" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>

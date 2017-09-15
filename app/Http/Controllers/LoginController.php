@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Flash;
+
 class LoginController extends Controller
 {
     public function __construct()
