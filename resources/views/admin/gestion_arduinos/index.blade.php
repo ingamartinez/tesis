@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('titulo', 'Gestión de usuarios')
+@section('titulo', 'Gestión de Arduinos')
 
 @section('content')
     <div class="row">

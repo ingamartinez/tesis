@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Validator;
 use DB;
 use Flash;
 
@@ -25,7 +24,7 @@ class UserController extends Controller
     }
     public function index()
     {
-        $users = User::all();
+        $users = User::withTrashed()->where('id','!=',5)->get();
         return view('admin.gestion_usuarios.index', compact('users'));
     }
 
@@ -179,9 +178,7 @@ class UserController extends Controller
 
             Flash::success('Usuario eliminado correctamente');
 
-
-
-            return response()->json($user,200);
+            return response()->json('Usuario eliminado correctamente',200);
 
         }catch (\Exception $ex){
             DB::rollBack();
@@ -189,6 +186,31 @@ class UserController extends Controller
             //Flash::error('Error al editar - '.$ex->getMessage());
 
             return response()->json('No se puede eliminar el usuario',404);
+        }
+
+
+    }
+    public function restore($id)
+    {
+        try{
+            DB::beginTransaction();
+
+            //throw new \Exception('No se pudo crear el usuario');
+
+            User::withTrashed()->findOrFail($id)->restore();
+
+            DB::commit();
+
+            Flash::success('Usuario restaurado correctamente');
+
+            return response()->json('Usuario Restaurado correctamente',200);
+
+        }catch (\Exception $ex){
+            DB::rollBack();
+
+            //Flash::error('Error al editar - '.$ex->getMessage());
+
+            return response()->json('No se pudo restaurar el usuario',404);
         }
 
 

@@ -6,10 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use HttpOz\Roles\Traits\HasRole;
 use HttpOz\Roles\Contracts\HasRole as HasRoleContract;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class User extends Authenticatable implements HasRoleContract
 {
-    use Notifiable,HasRole;
+    use Notifiable,HasRole,SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +31,8 @@ class User extends Authenticatable implements HasRoleContract
         'password', 'remember_token',
     ];
 
+    protected $dates = ['deleted_at'];
+
     public function getRolesByIdAttribute()
     {
         $collection = $this->roles()->each(function ($item, $key) {
@@ -37,7 +41,4 @@ class User extends Authenticatable implements HasRoleContract
 
         return $this->roles();
     }
-
-
-
 }
