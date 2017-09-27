@@ -67,6 +67,8 @@ class UserController extends Controller
 
             $user->attachRole(\HttpOz\Roles\Models\Role::findBySlug($request->radio_rol));
 
+            Flash::success('Usuario creado correctamente');
+
 //            throw new \Exception('No se pudo crear el usuario');
 
             DB::commit();

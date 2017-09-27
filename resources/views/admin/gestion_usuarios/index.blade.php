@@ -137,13 +137,12 @@
         var id = fila.data('id');
 
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Eliminar usuario',
+            text: "¿Estas seguro de eliminar este usuario?",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonColor: '#1ccc51',
+            confirmButtonText: 'Si'
         }).then(function () {
             $.ajax({
                 type: 'DELETE',
@@ -158,8 +157,7 @@
                         type: 'success',
                         showCancelButton: false,
                         confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Ok.'
+                        confirmButtonText: 'Ok'
                     }).then(function () {
                         location.reload();
                     });
@@ -204,7 +202,7 @@
                         type: 'success',
                         showCancelButton: false,
                         confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Ok.'
+                        confirmButtonText: 'Ok'
                     }).then(function () {
                         location.reload();
                     });

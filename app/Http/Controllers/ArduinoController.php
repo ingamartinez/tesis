@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Arduino;
 use App\User;
+use App\Zona;
 use Illuminate\Http\Request;
 use DB;
 use Flash;
@@ -16,10 +18,8 @@ class ArduinoController extends Controller
 
     public function validar(Request $request){
         $request->validate([
-            'name' => 'bail|required|max:191',
-            'email' => 'bail|required|email|unique:users,email,'.$request->id.'|max:191',
-            'password' => 'bail|required|max:191',
-            'radio_rol' => 'bail|required',
+            'id_arduino' => 'bail|required|unique:arduinos,mac,'.$request->id.'|max:191',
+            'zona' => 'bail|required',
         ]);
     }
     /**
@@ -29,8 +29,9 @@ class ArduinoController extends Controller
      */
     public function index()
     {
-        $users = User::withTrashed()->where('id','!=',5)->get();
-        return view('admin.gestion_usuarios.index', compact('users'));
+        $arduinos = Arduino::withTrashed()->get();
+        $zonas = Zona::all();
+        return view('admin.gestion_arduinos.index', compact('arduinos','zonas'));
     }
 
     /**
@@ -40,7 +41,7 @@ class ArduinoController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -51,7 +52,36 @@ class ArduinoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_arduino' => 'bail|required|unique:arduinos,mac|max:191',
+            'zona' => 'bail|required',
+        ]);
+
+//        dd($request->all());
+
+        try{
+            DB::beginTransaction();
+
+            $arduino = new Arduino();
+            $arduino->mac = $request->id_arduino;
+            $arduino->zonas_id= $request->zona;
+
+            $arduino->save();
+
+//            throw new \Exception('No se pudo registrar el Arduino');
+
+            Flash::success('Arduino creado correctamente');
+
+            DB::commit();
+
+            return redirect()->back();
+        }catch (\Exception $ex){
+            DB::rollBack();
+
+            Flash::error('Error al registrar Arduino - '.$ex->getMessage());
+
+            return redirect()->back();
+        }
     }
 
     /**
@@ -62,7 +92,17 @@ class ArduinoController extends Controller
      */
     public function show($id)
     {
-        //
+        try{
+            $arduino = Arduino::with('zona')->findOrFail($id);
+
+//            dd(json_encode($arduino));
+//
+            return response()->json($arduino,200);
+
+        }catch (\Exception $ex){
+            return response()->json(['message'=>'No se encuentra el Arduino'],404);
+//            return response()->json(['message'=>$ex],404);
+        }
     }
 
     /**
@@ -85,7 +125,28 @@ class ArduinoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $arduino = Arduino::findOrFail($id);
+
+        try{
+            DB::beginTransaction();
+
+            $arduino->mac = $request->id_arduino;
+            $arduino->zonas_id = $request->zona;
+            $arduino->save();
+
+            DB::commit();
+
+            Flash::success('Arduino editado correctamente');
+
+            return response()->json($arduino,200);
+
+        }catch (\Exception $ex){
+            DB::rollBack();
+
+            Flash::error('Error al editar arduino - '.$ex->getMessage());
+
+            return response()->json(['message'=>'No se encuentra el usuario'.$ex->getMessage()],404);
+        }
     }
 
     /**
@@ -96,7 +157,26 @@ class ArduinoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            DB::beginTransaction();
+
+            //throw new \Exception('No se pudo crear el usuario');
+
+            Arduino::destroy($id);
+
+            DB::commit();
+
+            Flash::success('Arduino eliminado correctamente');
+
+            return response()->json('Arduino eliminado correctamente',200);
+
+        }catch (\Exception $ex){
+            DB::rollBack();
+
+            //Flash::error('Error al editar - '.$ex->getMessage());
+
+            return response()->json('No se puede eliminar el arduino',404);
+        }
     }
     public function restore($id)
     {
@@ -105,20 +185,20 @@ class ArduinoController extends Controller
 
             //throw new \Exception('No se pudo crear el usuario');
 
-            User::withTrashed()->findOrFail($id)->restore();
+            Arduino::withTrashed()->findOrFail($id)->restore();
 
             DB::commit();
 
-            Flash::success('Usuario restaurado correctamente');
+            Flash::success('Arduino restaurado correctamente');
 
-            return response()->json('Usuario Restaurado correctamente',200);
+            return response()->json('Arduino restaurado correctamente',200);
 
         }catch (\Exception $ex){
             DB::rollBack();
 
             //Flash::error('Error al editar - '.$ex->getMessage());
 
-            return response()->json('No se pudo restaurar el usuario',404);
+            return response()->json('No se pudo restaurar el arduino'.$ex->getMessage(),404);
         }
 
 

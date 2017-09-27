@@ -19,7 +19,7 @@
                     </ul>
                 </div>
 
-                <button class="btn btn-primary waves-effect waves-light btn-lg m-b-5" data-toggle="modal" data-target="#modal_agregar_usuario">Agregar Usuario</button>
+                <button class="btn btn-primary waves-effect waves-light btn-lg m-b-5" data-toggle="modal" data-target="#modal_agregar_arduino">Agregar Arduino</button>
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -36,9 +36,8 @@
                 <table id="datatable" class="table table-striped table-bordered">
                     <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Roles</th>
+                        <th>Mac</th>
+                        <th>Zona</th>
                         <th>Fecha Creado</th>
                         <th>Fecha de Ultima Mod</th>
                         <th>Opciones</th>
@@ -46,22 +45,17 @@
                     </thead>
 
                     <tbody>
-                    @foreach($users as $user)
-                        <tr data-id="{{$user->id}}" class="{{($user->trashed() ? 'danger': false)}}">
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>
-                                @foreach($user->roles as $rol)
-                                {{$rol->name}}
-                                @endforeach
-                            </td>
-                            <td>{{$user->updated_at}}</td>
-                            <td>{{$user->created_at}}</td>
+                    @foreach($arduinos as $arduino)
+                        <tr data-id="{{$arduino->id}}" class="{{($arduino->trashed() ? 'danger': false)}}">
+                            <td>{{$arduino->mac}}</td>
+                            <td>{{$arduino->zona->nombre}}</td>
+                            <td>{{$arduino->updated_at}}</td>
+                            <td>{{$arduino->created_at}}</td>
 
                             <td>
-                                @if($user->trashed())
+                                @if($arduino->trashed())
                                     <a href="#" class="restaurar"><i class="fa fa-undo fa-lg" style="color: #0c7cd5"></i></a>
-                                @elseif(!($user->id == auth()->user()->id))
+                                @else
                                     <a href="#" class="editar"><i class="fa fa-pencil fa-lg" style="color: #10c469"></i></a>
                                     <a href="#" class="eliminar"><i class="fa fa-trash-o fa-lg" style="color: #ff5b5b"></i></a>
                                 @endif
@@ -77,8 +71,8 @@
 @endsection
 
 @section('modals')
-    @include('admin.gestion_usuarios.includes.modal_agregar_usuario')
-    @include('admin.gestion_usuarios.includes.modal_editar_usuario')
+    @include('admin.gestion_arduinos.includes.modal_agregar_arduino')
+    @include('admin.gestion_arduinos.includes.modal_editar_arduino')
 @endsection
 
 @push('script')
@@ -97,31 +91,29 @@
         var id = fila.data('id');
         $.ajax({
             type: 'GET',
-            url: '{{url('gestion-usuarios')}}/' + id,
+            url: '{{url('gestion-arduinos')}}/' + id,
             success: function (data) {
 
-                $('#modal_editar_usuario_id').val(data.id);
-                $('#modal_editar_usuario_name').val(data.name);
-                $('#modal_editar_usuario_email').val(data.email);
+                $('#modal_editar_arduino_id').val(data.id);
+                $('#modal_editar_arduino_id_arduino').val(data.mac);
+                $('#modal_editar_arduino_zona').val(data.zonas_id);
 
-                $('input:radio[name=radio_rol]').val([_.first(data.roles).slug]);
-
-                $("#modal_editar_usuario").modal('toggle');
+                $("#modal_editar_arduino").modal('toggle');
             }
         });
     });
 
 
-    $('#form_editar_usuario').on('submit', function (e) {
+    $('#form_editar_arduino').on('submit', function (e) {
         if (!e.isDefaultPrevented()) {
             e.preventDefault();
-            var id=$("#modal_editar_usuario_id").val();
+            var id=$("#modal_editar_arduino_id").val();
 //            console.log(id);
 
             $.ajax({
                 type: 'PUT',
-                url: '{{url('gestion-usuarios')}}/'+id,
-                data: $('#form_editar_usuario').serialize(),
+                url: '{{url('gestion-arduinos')}}/'+id,
+                data: $('#form_editar_arduino').serialize(),
                 success: function(){
                     console.log(id);
                     location.reload();
@@ -137,29 +129,27 @@
         var id = fila.data('id');
 
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Eliminar arduino',
+            text: "¿Estas seguro de eliminar este arduino?",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonColor: '#1ccc51',
+            confirmButtonText: 'Si'
         }).then(function () {
             $.ajax({
                 type: 'DELETE',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '{{url('gestion-usuarios')}}/' + id,
+                url: '{{url('gestion-arduinos')}}/' + id,
                 success: function (data) {
                     swal({
                         title: 'Eliminado!',
-                        text: "El usuario ha sido eliminado.",
+                        text: "El arduino ha sido eliminado.",
                         type: 'success',
                         showCancelButton: false,
                         confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Ok.'
+                        confirmButtonText: 'Ok'
                     }).then(function () {
                         location.reload();
                     });
@@ -184,8 +174,8 @@
         var id = fila.data('id');
 
         swal({
-            title: 'Restaurar Usuario',
-            text: "¿Esta seguro de restaurar este usuario?",
+            title: 'Restaurar arduino',
+            text: "¿Esta seguro de restaurar este arduino?",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#1ccc51',
@@ -196,15 +186,15 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '{{url('restaurar-usuario')}}/' + id,
+                url: '{{url('restaurar-arduino')}}/' + id,
                 success: function (data) {
                     swal({
                         title: 'Restaurado!',
-                        text: "El usuario ha sido resaurado.",
+                        text: "El arduino ha sido resaurado.",
                         type: 'success',
                         showCancelButton: false,
                         confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Ok.'
+                        confirmButtonText: 'Ok'
                     }).then(function () {
                         location.reload();
                     });
