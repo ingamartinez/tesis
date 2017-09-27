@@ -51,4 +51,8 @@ Route::middleware(['role:admin|super-admin','auth'])->group(function () {
         'delete' => 'zona.delete'
     ]]);
 
+    Route::get('monitoreo', function () {
+        return view('usuario.monitoreo.index');
+    });
+
 });

@@ -105,7 +105,14 @@
 
             <!--- Sidemenu -->
             <div id="sidebar-menu">
-                @include('menu.admin')
+                @role('admin|super-admin')
+                    @include('menu.admin')
+                @endrole
+
+                @role('user|super-admin')
+                    @include('menu.user')
+                @endrole
+
 
                 <div class="clearfix"></div>
             </div>

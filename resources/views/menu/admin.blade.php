@@ -1,8 +1,8 @@
 <ul>
-    <li class="text-muted menu-title">Navegación</li>
+    <li class="text-muted menu-title">Administración</li>
 
     <li>
-        <a href="{{url('gestion-usuarios')}}" class="waves-effect"><i class="zmdi zmdi-view-dashboard"></i> <span> Gestión usuarios </span> </a>
+        <a href="{{url('gestion-usuarios')}}" class="waves-effect"><i class="zmdi zmdi-accounts-list-alt"></i> <span> Gestión usuarios </span> </a>
     </li>
 
     <li>
