@@ -51,7 +51,7 @@ class ActualizarArduinoEvent implements ShouldBroadcast
     public function broadcastOn()
     {
         return [
-            "chat-room.1"
+            "arduino"
         ];
     }
 }
