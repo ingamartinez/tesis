@@ -194,6 +194,9 @@
 <script src="{{asset('assets/js/sha3.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery.formdata.js')}}"></script>
 
+<script src="{{asset('assets/js/moment-with-locales.js')}}"></script>
+<script src="{{asset('assets/js/livestamp.js')}}"></script>
+
 <script src="{{asset('assets/js/arduino.js')}}"></script>
 
 @stack('script')

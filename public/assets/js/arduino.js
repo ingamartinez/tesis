@@ -84,7 +84,31 @@ module.exports = __webpack_require__(1);
 __webpack_require__(2);
 
 Echo.channel('arduino').listen('ActualizarArduinoEvent', function (e) {
-  console.log(e);
+    console.log(e);
+
+    $("#arduino-id-" + e.id).find("#arduino-luz-" + e.id).val(e.luz).trigger('change');
+    $("#arduino-id-" + e.id).find("#arduino-temp-" + e.id).val(e.temperatura).trigger('change');
+
+    //zmdi-more | zmdi zmdi-block | zmdi zmdi-block
+
+    // let sonido = alert(e['sonido']);
+    //
+    if (e.sonido === "SI") {
+        $("#arduino-id-" + e.id).find("#arduino-sonido-" + e.id + " > i").removeClass().addClass("zmdi zmdi-audio");
+    } else {
+        $("#arduino-id-" + e.id).find("#arduino-sonido-" + e.id + " > i").removeClass().addClass("zmdi zmdi-block");
+    }
+
+    if (e.movimiento === "SI") {
+        $("#arduino-id-" + e.id).find("#arduino-movimiento-" + e.id + " > i").removeClass().addClass("zmdi zmdi-run");
+    } else {
+        $("#arduino-id-" + e.id).find("#arduino-movimiento-" + e.id + " > i").removeClass().addClass("zmdi zmdi-male-alt");
+    }
+
+    $('#arduino-update-' + e.id).livestamp(moment().fromNow());
+    $("#arduino-id-" + e.id).find("#arduino-update-" + e.id).livestamp(new Date());
+
+    $("#arduino-id-" + e.id).unblock();
 });
 
 /***/ }),
