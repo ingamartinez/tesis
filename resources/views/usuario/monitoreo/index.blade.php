@@ -16,7 +16,7 @@
                         </ul>
                     </div>
 
-                    <h4 class="header-title m-t-0 m-b-30" >Arduino ID: 1</h4>
+                    <h4 class="header-title m-t-0 m-b-30" >Arduino ID: {{$arduino->id}}</h4>
 
                     <div class="widget-chart-1">
                         <div class="widget-chart-box-1">
