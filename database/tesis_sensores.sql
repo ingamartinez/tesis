@@ -1,19 +1,42 @@
 /*
 Navicat MariaDB Data Transfer
 
-Source Server         : localhost
-Source Server Version : 100125
+Source Server         : Localhost
+Source Server Version : 100121
 Source Host           : localhost:3306
 Source Database       : tesis_sensores
 
 Target Server Type    : MariaDB
-Target Server Version : 100125
+Target Server Version : 100121
 File Encoding         : 65001
 
-Date: 2017-09-24 16:06:50
+Date: 2017-10-03 14:12:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for arduinos
+-- ----------------------------
+DROP TABLE IF EXISTS `arduinos`;
+CREATE TABLE `arduinos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mac` varchar(45) NOT NULL,
+  `zonas_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_arduinos_zonas1_idx` (`zonas_id`),
+  CONSTRAINT `fk_arduinos_zonas1` FOREIGN KEY (`zonas_id`) REFERENCES `zonas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of arduinos
+-- ----------------------------
+INSERT INTO `arduinos` VALUES ('1', '123456789', '1', '2017-09-26 15:30:32', '2017-09-26 15:30:34', null);
+INSERT INTO `arduinos` VALUES ('2', '987654321', '2', '2017-09-26 15:30:49', '2017-09-27 16:00:11', null);
+INSERT INTO `arduinos` VALUES ('6', '123', '1', '2017-09-26 22:25:23', '2017-09-26 22:25:23', null);
 
 -- ----------------------------
 -- Table structure for migrations
@@ -87,14 +110,14 @@ CREATE TABLE `role_user` (
   KEY `role_user_user_id_index` (`user_id`),
   CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE,
   CONSTRAINT `role_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of role_user
 -- ----------------------------
 INSERT INTO `role_user` VALUES ('1', '1', '1', '2017-09-11 00:12:13', '2017-09-11 00:12:13');
 INSERT INTO `role_user` VALUES ('5', '3', '5', '2017-09-24 16:48:56', '2017-09-24 16:48:56');
-INSERT INTO `role_user` VALUES ('6', '2', '4', '2017-09-24 17:05:37', '2017-09-24 17:05:37');
+INSERT INTO `role_user` VALUES ('8', '2', '4', '2017-09-27 14:17:55', '2017-09-27 14:17:55');
 
 -- ----------------------------
 -- Table structure for users
@@ -116,7 +139,27 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'Alejandro Martinez', 'lider@lider.com', '602bdc204140db016bee5374895e5568ce422fabe17e064061d80097', 'G6BoV61Az8Zt94Za1Wsm6fFWXwO0KKagQqEraVxE64Hblq7CoBw1WkxpnpJ8', '2017-09-11 00:12:13', '2017-09-11 00:12:13', null);
-INSERT INTO `users` VALUES ('4', 'Edwin Chapuel', 'ed.ch@gmail.com', '602bdc204140db016bee5374895e5568ce422fabe17e064061d80097', 'nla6PiFj95HSad8FZWMxkMBBQyLPNPOzGnRl2RTjfURRND3RMMv5F3vF4xVw', '2017-09-24 12:47:32', '2017-09-24 14:51:14', null);
-INSERT INTO `users` VALUES ('5', 'Super Admin', 'admin@admin.com', '602bdc204140db016bee5374895e5568ce422fabe17e064061d80097', null, null, null, null);
+INSERT INTO `users` VALUES ('1', 'Alejandro Martinez', 'lider@lider.com', '602bdc204140db016bee5374895e5568ce422fabe17e064061d80097', 'lhqwNN2et6mRhq8r3AqDBkvgMEiopo3JGPBauaLDlflhSCErUFca9cegZgg5', '2017-09-11 00:12:13', '2017-09-11 00:12:13', null);
+INSERT INTO `users` VALUES ('4', 'Edwin Chapuel', 'ed.ch@gmail.com', '602bdc204140db016bee5374895e5568ce422fabe17e064061d80097', 'P5v3O2aAJ7liDRC9jVRzP3TeoYbWr3ly5kznXcX4HoUWzfiGWzVsF1fmeVMI', '2017-09-24 12:47:32', '2017-09-24 14:51:14', null);
+INSERT INTO `users` VALUES ('5', 'Super Admin', 'admin@admin.com', '602bdc204140db016bee5374895e5568ce422fabe17e064061d80097', 'paIZFxv0APivINtHGoD0EsTncq5bP67DwzaYZFWLKooL2DBfo34Wp6AJLKvH', null, null, null);
+
+-- ----------------------------
+-- Table structure for zonas
+-- ----------------------------
+DROP TABLE IF EXISTS `zonas`;
+CREATE TABLE `zonas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of zonas
+-- ----------------------------
+INSERT INTO `zonas` VALUES ('1', 'Aula 301', null, '2017-09-26 14:31:29', '2017-09-26 14:31:31', null);
+INSERT INTO `zonas` VALUES ('2', 'Aula 302', null, '2017-09-26 14:31:45', '2017-09-26 14:31:47', null);
 SET FOREIGN_KEY_CHECKS=1;
