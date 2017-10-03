@@ -1212,3 +1212,14 @@ pre {
     margin-top: 0px;
   }
 }
+
+.blockOverlay{
+  border-radius: 10px;
+}
+.blockMsg {
+  z-index: 998 !important;
+}
+.update-date{
+  font-weight: 700;
+  font-style: italic;
+}

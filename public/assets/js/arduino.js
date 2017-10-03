@@ -105,8 +105,8 @@ Echo.channel('arduino').listen('ActualizarArduinoEvent', function (e) {
         $("#arduino-id-" + e.id).find("#arduino-movimiento-" + e.id + " > i").removeClass().addClass("zmdi zmdi-male-alt");
     }
 
-    $('#arduino-update-' + e.id).livestamp(moment().fromNow());
-    $("#arduino-id-" + e.id).find("#arduino-update-" + e.id).livestamp(new Date());
+    //$('#arduino-update-'+e.id).livestamp(moment().fromNow());
+    $("#arduino-update-" + e.id).livestamp(new Date());
 
     $("#arduino-id-" + e.id).unblock();
 });
