@@ -23,6 +23,7 @@
     <link href="{{asset('assets/css/pages.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/menu.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/css/jquery.timepicker.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/plugins/bootstrap-sweetalert/sweetalert2.css')}}" rel="stylesheet" type="text/css" />
 
     <!-- App css -->
@@ -196,6 +197,8 @@
 
 <script src="{{asset('assets/js/moment-with-locales.js')}}"></script>
 <script src="{{asset('assets/js/livestamp.js')}}"></script>
+
+<script src="{{asset('assets/js/jquery.timepicker.js')}}"></script>
 
 <script src="{{asset('assets/js/arduino.js')}}"></script>
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Zona;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
 use Flash;
@@ -17,10 +19,10 @@ class ZonaController extends Controller
 
     public function validar(Request $request){
         $request->validate([
-            'name' => 'bail|required|max:191',
-            'email' => 'bail|required|email|unique:users,email,'.$request->id.'|max:191',
-            'password' => 'bail|required|max:191',
-            'radio_rol' => 'bail|required',
+            'nombre' => 'bail|required|max:191',
+            'descripcion' => 'bail|max:191',
+            'hora_inicio' => 'bail|required|max:191',
+            'hora_fin' => 'bail|required',
         ]);
     }
     /**
@@ -30,8 +32,8 @@ class ZonaController extends Controller
      */
     public function index()
     {
-        $users = User::withTrashed()->where('id','!=',5)->get();
-        return view('admin.gestion_usuarios.index', compact('users'));
+        $zonas = Zona::withTrashed()->get();
+        return view('admin.gestion_zonas.index', compact('zonas'));
     }
 
     /**
@@ -52,7 +54,43 @@ class ZonaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'bail|required|max:191',
+            'descripcion' => 'bail|max:191',
+            'hora_inicio' => 'bail|required|max:191',
+            'hora_fin' => 'bail|required',
+        ]);
+
+//        dd($request->all());
+
+        try{
+            DB::beginTransaction();
+
+            $hora_inicio = new Carbon($request->hora_inicio);
+            $hora_fin= new Carbon($request->hora_fin);
+
+            $zona = new Zona();
+            $zona->nombre = $request->nombre;
+            $zona->descripcion = $request->descripcion;
+            $zona->hora_inicio = $hora_inicio->toTimeString();
+            $zona->hora_fin = $hora_fin->toTimeString();
+
+            $zona->save();
+
+//            throw new \Exception('No se pudo registrar el Arduino');
+
+            Flash::success('Zona creada correctamente');
+
+            DB::commit();
+
+            return redirect()->back();
+        }catch (\Exception $ex){
+            DB::rollBack();
+
+            Flash::error('Error al registrar Zona - '.$ex->getMessage());
+
+            return redirect()->back();
+        }
     }
 
     /**
