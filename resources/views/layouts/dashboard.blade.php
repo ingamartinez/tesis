@@ -28,6 +28,7 @@
 
     <!-- App css -->
     <link href="{{asset('assets/plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/plugins/toastr/toastr.css')}}" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -189,6 +190,7 @@
 <script src="{{asset('assets/js/underscore.js')}}"></script>
 
 <script src="{{asset('assets/plugins/bootstrap-sweetalert/sweetalert2.js')}}"></script>
+<script src="{{asset('assets/plugins/toastr/toastr.min.js')}}"></script>
 
 <script type="text/javascript" src="{{asset('assets/js/validator.js')}}"></script>
 

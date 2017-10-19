@@ -60,6 +60,7 @@
 
                             <td>
                                 @if($user->trashed())
+                                    <a href="#" class="editar"><i class="fa fa-pencil fa-lg" style="color: #10c469"></i></a>
                                     <a href="#" class="restaurar"><i class="fa fa-undo fa-lg" style="color: #0c7cd5"></i></a>
                                 @elseif(!($user->id == auth()->user()->id))
                                     <a href="#" class="editar"><i class="fa fa-pencil fa-lg" style="color: #10c469"></i></a>

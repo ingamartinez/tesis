@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : Localhost Laragon
-Source Server Version : 100121
+Source Server         : localhost laragon
+Source Server Version : 50719
 Source Host           : localhost:3306
 Source Database       : tesis_sensores
 
 Target Server Type    : MYSQL
-Target Server Version : 100121
+Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2017-10-18 17:51:28
+Date: 2017-10-19 02:04:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,7 +36,7 @@ CREATE TABLE `arduinos` (
 -- ----------------------------
 INSERT INTO `arduinos` VALUES ('1', '123456789', '1', '2017-09-26 15:30:32', '2017-09-26 15:30:34', null);
 INSERT INTO `arduinos` VALUES ('2', '987654321', '2', '2017-09-26 15:30:49', '2017-09-27 16:00:11', null);
-INSERT INTO `arduinos` VALUES ('6', '123', '1', '2017-09-26 22:25:23', '2017-09-26 22:25:23', null);
+INSERT INTO `arduinos` VALUES ('6', '123', '1', '2017-09-26 22:25:23', '2017-10-19 02:38:52', null);
 
 -- ----------------------------
 -- Table structure for migrations
@@ -70,6 +70,29 @@ CREATE TABLE `password_resets` (
 
 -- ----------------------------
 -- Records of password_resets
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for registro
+-- ----------------------------
+DROP TABLE IF EXISTS `registro`;
+CREATE TABLE `registro` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mac` varchar(45) NOT NULL,
+  `zona` varchar(45) NOT NULL,
+  `alert` tinyint(4) DEFAULT NULL,
+  `luz` int(11) DEFAULT NULL,
+  `sonido` int(11) DEFAULT NULL,
+  `movimiento` varchar(45) DEFAULT NULL,
+  `temperatura` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of registro
 -- ----------------------------
 
 -- ----------------------------
@@ -139,7 +162,7 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'Alejandro Martinez', 'lider@lider.com', '602bdc204140db016bee5374895e5568ce422fabe17e064061d80097', 'lhqwNN2et6mRhq8r3AqDBkvgMEiopo3JGPBauaLDlflhSCErUFca9cegZgg5', '2017-09-11 00:12:13', '2017-09-11 00:12:13', null);
+INSERT INTO `users` VALUES ('1', 'Alejandro Martinez', 'lider@lider.com', '602bdc204140db016bee5374895e5568ce422fabe17e064061d80097', 'lhqwNN2et6mRhq8r3AqDBkvgMEiopo3JGPBauaLDlflhSCErUFca9cegZgg5', '2017-09-11 00:12:13', '2017-10-19 02:40:05', null);
 INSERT INTO `users` VALUES ('4', 'Edwin Chapuel', 'ed.ch@gmail.com', '602bdc204140db016bee5374895e5568ce422fabe17e064061d80097', 'P5v3O2aAJ7liDRC9jVRzP3TeoYbWr3ly5kznXcX4HoUWzfiGWzVsF1fmeVMI', '2017-09-24 12:47:32', '2017-09-24 14:51:14', null);
 INSERT INTO `users` VALUES ('5', 'Super Admin', 'admin@admin.com', '602bdc204140db016bee5374895e5568ce422fabe17e064061d80097', 'paIZFxv0APivINtHGoD0EsTncq5bP67DwzaYZFWLKooL2DBfo34Wp6AJLKvH', null, null, null);
 
@@ -162,7 +185,7 @@ CREATE TABLE `zonas` (
 -- ----------------------------
 -- Records of zonas
 -- ----------------------------
-INSERT INTO `zonas` VALUES ('1', 'Aula 301', null, '2017-09-26 14:31:29', '2017-09-26 14:31:31', null, '07:00:00', '22:00:00');
-INSERT INTO `zonas` VALUES ('2', 'Aula 302', null, '2017-09-26 14:31:45', '2017-09-26 14:31:47', null, '07:00:00', '22:00:00');
-INSERT INTO `zonas` VALUES ('3', 'Aula 303', null, '2017-10-18 20:19:51', '2017-10-18 20:19:51', null, '06:30:00', '22:30:00');
+INSERT INTO `zonas` VALUES ('1', 'Aula 301', null, '2017-09-26 14:31:29', '2017-10-19 02:27:21', null, '09:00:00', '22:00:00');
+INSERT INTO `zonas` VALUES ('2', 'Aula 302', null, '2017-09-26 14:31:45', '2017-09-26 14:31:47', null, '07:00:00', '23:10:00');
+INSERT INTO `zonas` VALUES ('3', 'Aula 303', null, '2017-10-18 20:19:51', '2017-10-19 02:38:57', null, '06:30:00', '22:30:00');
 SET FOREIGN_KEY_CHECKS=1;

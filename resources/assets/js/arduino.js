@@ -35,4 +35,6 @@ Echo.channel('arduino')
 
     $("#arduino-id-"+e.id).unblock();
 
+}).listen('AlertaArduinoEvent', (e) => {
+    toastr.error('Se ha detectado un parametro anormal en la zona: '+e.id_zona, 'Alerta');
 });

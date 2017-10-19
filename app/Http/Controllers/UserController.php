@@ -93,7 +93,7 @@ class UserController extends Controller
     public function show($id)
     {
         try{
-            $user = User::with('roles')->findOrFail($id);
+            $user = User::withTrashed()->with('roles')->findOrFail($id);
 
 //            $rolID=[];
 //            foreach ($user->roles as $rol){
@@ -131,7 +131,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::withTrashed()->findOrFail($id);
 
         try{
             DB::beginTransaction();

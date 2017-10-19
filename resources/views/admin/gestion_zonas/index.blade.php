@@ -96,33 +96,32 @@
         var id = fila.data('id');
         $.ajax({
             type: 'GET',
-            url: '{{url('gestion-usuarios')}}/' + id,
+            url: '{{url('gestion-zonas')}}/' + id,
             success: function (data) {
 
-                $('#modal_editar_usuario_id').val(data.id);
-                $('#modal_editar_usuario_name').val(data.name);
-                $('#modal_editar_usuario_email').val(data.email);
+                $('#modal_editar_zona_id').val(data.id);
+                $('#modal_editar_zona_nombre').val(data.nombre);
+                $('#modal_editar_zona_descripcion').val(data.descripcion);
+                $('#modal_editar_zona_hora-inicio').val(data.hora_inicio);
+                $('#modal_editar_zona_hora-fin').val(data.hora_fin);
 
-                $('input:radio[name=radio_rol]').val([_.first(data.roles).slug]);
-
-                $("#modal_editar_usuario").modal('toggle');
+                $("#modal_editar_zona").modal('toggle');
             }
         });
     });
 
 
-    $('#form_editar_usuario').on('submit', function (e) {
+    $('#form_editar_zona').on('submit', function (e) {
         if (!e.isDefaultPrevented()) {
             e.preventDefault();
-            var id=$("#modal_editar_usuario_id").val();
+            var id=$("#modal_editar_zona_id").val();
 //            console.log(id);
 
             $.ajax({
                 type: 'PUT',
-                url: '{{url('gestion-usuarios')}}/'+id,
-                data: $('#form_editar_usuario').serialize(),
+                url: '{{url('gestion-zonas')}}/'+id,
+                data: $('#form_editar_zona').serialize(),
                 success: function(){
-                    console.log(id);
                     location.reload();
                 }
             });
@@ -136,8 +135,8 @@
         var id = fila.data('id');
 
         swal({
-            title: 'Eliminar usuario',
-            text: "¿Estas seguro de eliminar este usuario?",
+            title: 'Eliminar Zona',
+            text: "¿Estas seguro de eliminar esta Zona?",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#1ccc51',
@@ -148,11 +147,11 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '{{url('gestion-usuarios')}}/' + id,
+                url: '{{url('gestion-zonas')}}/' + id,
                 success: function (data) {
                     swal({
-                        title: 'Eliminado!',
-                        text: "El usuario ha sido eliminado.",
+                        title: 'Eliminada!',
+                        text: "La zona ha sido eliminada.",
                         type: 'success',
                         showCancelButton: false,
                         confirmButtonColor: '#3085d6',
@@ -181,8 +180,8 @@
         var id = fila.data('id');
 
         swal({
-            title: 'Restaurar Usuario',
-            text: "¿Esta seguro de restaurar este usuario?",
+            title: 'Restaurar Zona',
+            text: "¿Esta seguro de restaurar esta Zona?",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#1ccc51',
@@ -193,11 +192,11 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '{{url('restaurar-usuario')}}/' + id,
+                url: '{{url('restaurar-zona')}}/' + id,
                 success: function (data) {
                     swal({
-                        title: 'Restaurado!',
-                        text: "El usuario ha sido resaurado.",
+                        title: 'Restaurada!',
+                        text: "La zona ha sido resaurada.",
                         type: 'success',
                         showCancelButton: false,
                         confirmButtonColor: '#3085d6',

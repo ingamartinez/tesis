@@ -93,7 +93,7 @@ class ArduinoController extends Controller
     public function show($id)
     {
         try{
-            $arduino = Arduino::with('zona')->findOrFail($id);
+            $arduino = Arduino::withTrashed()->with('zona')->findOrFail($id);
 
 //            dd(json_encode($arduino));
 //
@@ -125,7 +125,7 @@ class ArduinoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $arduino = Arduino::findOrFail($id);
+        $arduino = Arduino::withTrashed()->findOrFail($id);
 
         try{
             DB::beginTransaction();
@@ -145,7 +145,7 @@ class ArduinoController extends Controller
 
             Flash::error('Error al editar arduino - '.$ex->getMessage());
 
-            return response()->json(['message'=>'No se encuentra el usuario'.$ex->getMessage()],404);
+            return response()->json(['message'=>'Error al editar arduino'.$ex->getMessage()],404);
         }
     }
 

@@ -101,7 +101,19 @@ class ZonaController extends Controller
      */
     public function show($id)
     {
-        //
+        try{
+            $zona = Zona::withTrashed()->findOrFail($id);
+            $zona->hora_inicio = Carbon::parse($zona->hora_inicio)->format('g:i A');
+            $zona->hora_fin = Carbon::parse($zona->hora_fin)->format('g:i A');
+
+//            dd(json_encode($arduino));
+//
+            return response()->json($zona,200);
+
+        }catch (\Exception $ex){
+            return response()->json(['message'=>'No se encuentra la zona'],404);
+//            return response()->json(['message'=>$ex],404);
+        }
     }
 
     /**
@@ -124,7 +136,34 @@ class ZonaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $zona = Zona::withTrashed()->findOrFail($id);
+
+        try{
+            DB::beginTransaction();
+
+            $hora_inicio = new Carbon($request->hora_inicio);
+            $hora_fin= new Carbon($request->hora_fin);
+
+            $zona->nombre = $request->nombre;
+            $zona->descripcion = $request->descripcion;
+            $zona->hora_inicio = $hora_inicio->toTimeString();
+            $zona->hora_fin = $hora_fin->toTimeString();
+
+            $zona->save();
+
+            DB::commit();
+
+            Flash::success('Zona editada correctamente');
+
+            return response()->json($zona,200);
+
+        }catch (\Exception $ex){
+            DB::rollBack();
+
+            Flash::error('Error al editar Zona - '.$ex->getMessage());
+
+            return response()->json(['message'=>'Error al editar Zona'.$ex->getMessage()],404);
+        }
     }
 
     /**
@@ -135,7 +174,26 @@ class ZonaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            DB::beginTransaction();
+
+            //throw new \Exception('No se pudo crear el usuario');
+
+            Zona::destroy($id);
+
+            DB::commit();
+
+            Flash::success('Zona eliminada correctamente');
+
+            return response()->json('Zona eliminada correctamente',200);
+
+        }catch (\Exception $ex){
+            DB::rollBack();
+
+            //Flash::error('Error al editar - '.$ex->getMessage());
+
+            return response()->json('No se puede eliminar la Zona',404);
+        }
     }
 
     public function restore($id)
@@ -145,20 +203,20 @@ class ZonaController extends Controller
 
             //throw new \Exception('No se pudo crear el usuario');
 
-            User::withTrashed()->findOrFail($id)->restore();
+            Zona::withTrashed()->findOrFail($id)->restore();
 
             DB::commit();
 
-            Flash::success('Usuario restaurado correctamente');
+            Flash::success('Zona restaurada correctamente');
 
-            return response()->json('Usuario Restaurado correctamente',200);
+            return response()->json('Zona Restaurada correctamente',200);
 
         }catch (\Exception $ex){
             DB::rollBack();
 
             //Flash::error('Error al editar - '.$ex->getMessage());
 
-            return response()->json('No se pudo restaurar el usuario',404);
+            return response()->json('No se pudo restaurar la Zona',404);
         }
 
 
