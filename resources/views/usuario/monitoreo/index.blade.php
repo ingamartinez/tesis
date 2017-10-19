@@ -48,6 +48,18 @@
                                 </div>
                                 <br>
                                 <div class="widget-chart-1">
+                                    <div class="widget-chart-box-1">
+                                        <input data-plugin="knob" data-width="100" data-height="100" data-fgColor="#51c93c"
+                                               data-bgColor="#b3d6ad" value="0"
+                                               data-skin="tron" data-angleOffset="180" data-readOnly=true
+                                               data-thickness=".2" id="arduino-sonido-{{$arduino->id}}"/>
+                                    </div>
+                                    <div class="widget-detail-1">
+                                        <h2 style="padding-top: 25px" class="m-b-0"> Sonido (dB) </h2>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="widget-chart-1">
                                     <div class="widget-chart-box-1" id="arduino-movimiento-{{$arduino->id}}">
                                         {{-- zmdi-more | zmdi zmdi-run | zmdi zmdi-male-alt--}}
                                         <i class="zmdi zmdi-more" style="display: inline-block;
@@ -65,27 +77,6 @@
                                     </div>
                                     <div class="widget-detail-1">
                                         <h2 class="p-t-10 m-b-0"> Movimiento </h2>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="widget-chart-1">
-                                    <div class="widget-chart-box-1" id="arduino-sonido-{{$arduino->id}}">
-                                        {{-- zmdi zmdi-more | zmdi zmdi-audio | zmdi zmdi-block--}}
-                                        <i class="zmdi zmdi-more" style="display: inline-block;
-                                                        font-size: 75px;">
-
-                                        </i>
-                                        <i class="zmdi zmdi-more" style="display: inline-block;
-                                                        font-size: 75px;">
-
-                                        </i>
-                                        <i class="zmdi zmdi-more" style="display: inline-block;
-                                                        font-size: 75px;">
-
-                                        </i>
-                                    </div>
-                                    <div class="widget-detail-1">
-                                        <h2 class="p-t-10 m-b-0"> Sonido </h2>
                                     </div>
                                 </div>
 

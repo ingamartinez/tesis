@@ -19,9 +19,6 @@ class ActualizarArduinoEvent implements ShouldBroadcast
     public $sonido;
     public $movimiento;
 
-    public $status;
-    public $message;
-
     public $id;
 
     /**
@@ -29,16 +26,13 @@ class ActualizarArduinoEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($luz, $temperatura, $sonido, $movimiento, $status, $message, $id)
+    public function __construct($luz, $temperatura, $sonido, $movimiento, $id)
     {
 
         $this->luz = $luz;
         $this->temperatura= $temperatura;
         $this->sonido = $sonido;
         $this->movimiento= $movimiento;
-
-        $this->status = $status;
-        $this->message = $message;
 
         $this->id = $id;
     }

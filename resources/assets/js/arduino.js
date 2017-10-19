@@ -13,16 +13,17 @@ Echo.channel('arduino')
 
     $("#arduino-id-"+e.id).find( "#arduino-luz-"+e.id).val(e.luz).trigger('change');
     $("#arduino-id-"+e.id).find( "#arduino-temp-"+e.id).val(e.temperatura).trigger('change');
+    $("#arduino-id-"+e.id).find( "#arduino-sonido-"+e.id).val(e.sonido).trigger('change');
 
     //zmdi-more | zmdi zmdi-block | zmdi zmdi-block
 
     // let sonido = alert(e['sonido']);
     //
-    if(e.sonido==="SI"){
-        $("#arduino-id-"+e.id).find( "#arduino-sonido-"+e.id+" > i").removeClass().addClass( "zmdi zmdi-audio" );
-    }else{
-        $("#arduino-id-"+e.id).find( "#arduino-sonido-"+e.id+" > i").removeClass().addClass( "zmdi zmdi-block" );
-    }
+    // if(e.sonido==="SI"){
+    //     $("#arduino-id-"+e.id).find( "#arduino-sonido-"+e.id+" > i").removeClass().addClass( "zmdi zmdi-audio" );
+    // }else{
+    //     $("#arduino-id-"+e.id).find( "#arduino-sonido-"+e.id+" > i").removeClass().addClass( "zmdi zmdi-block" );
+    // }
 
     if(e.movimiento==="SI"){
         $("#arduino-id-"+e.id).find( "#arduino-movimiento-"+e.id+" > i").removeClass().addClass( "zmdi zmdi-run" );

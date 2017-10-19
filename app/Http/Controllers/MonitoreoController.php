@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Arduino;
+use App\Events\ActualizarArduinoEvent;
 use App\Events\AlertaArduinoEvent;
 use App\Mail\OrderShipped;
 use App\Zona;
@@ -17,6 +18,13 @@ class MonitoreoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('role:super-admin|user')->except('store');
+        $this->middleware('auth')->except('store');
+    }
+
     public function index()
     {
         $zonas = Zona::with('arduinos')->get();
@@ -26,19 +34,30 @@ class MonitoreoController extends Controller
 
     public function store(Request $request)
     {
-//        $zona = Arduino::withTrashed()->findOrFail($request->arduino_id)->zona;
+        event(new ActualizarArduinoEvent(
+            $request->luz,
+            $request->temperatura,
+            $request->sonido,
+            $request->movimiento,
 
-        $arduino = Arduino::withTrashed()->with('zona')->findOrFail(2);
+            $request->id
+        ));
 
-        $now = new Carbon('5:12:15');
-
+        $arduino = Arduino::withTrashed()->with('zona')->findOrFail($request->id);
+        $now = new Carbon();
         $now->toTimeString();
 
         if(($now->toTimeString() > $arduino->zona->hora_fin) || ($now->toTimeString() < $arduino->zona->hora_inicio)){
             if ($request->luz >=20 || $request->sonido >= 40 || $request->temperatura <=25 || $request->movimiento == "SI"){
+
                 Mail::to('ing.amartinez94@gmail.com')->send(new OrderShipped($arduino,$request));
-                event(new AlertaArduinoEvent($arduino->zona->nombre,'Alerta'));
+
+                event(new AlertaArduinoEvent(
+                    $arduino->zona->nombre,
+                    'Alerta')
+                );
             }
         }
+        return $request->all();
     }
 }

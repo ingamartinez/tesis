@@ -20,10 +20,11 @@ padding: 20px 0;
         ¡Hola! <br><br>
         Hemos detectado un funcionamiento anormal en uno de los sensores en la zona <strong>{{$arduino->zona->nombre}}</strong> <br><br>
 
-        <strong>Luz: </strong>{{$request->luz}}
-        <strong>Sonido: </strong>{{$request->sonido}}
+        <strong>Luz: </strong>{{$request->luz}}LX
+        <strong>Temperatura: </strong>{{$request->temperatura}}°C
+        <strong>Sonido: </strong>{{$request->sonido}}Db
         <strong>Movimiento: </strong>{{$request->movimiento}}
-        <strong>Temperatura: </strong>{{$request->temperatura}}
+
 
 
     </p>

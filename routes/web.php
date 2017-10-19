@@ -53,10 +53,9 @@ Route::middleware(['role:admin|super-admin','auth'])->group(function () {
 
 });
 
-Route::middleware(['role:super-admin|user','auth'])->group(function () {
-
-
-
-});
 
 Route::resource('monitoreo','MonitoreoController');
+
+Route::post('prueba', function (\Illuminate\Http\Request $request) {
+    return $request->all();
+});
