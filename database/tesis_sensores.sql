@@ -1,16 +1,16 @@
 /*
-Navicat MariaDB Data Transfer
+Navicat MySQL Data Transfer
 
-Source Server         : Localhost
+Source Server         : Localhost Laragon
 Source Server Version : 100121
 Source Host           : localhost:3306
 Source Database       : tesis_sensores
 
-Target Server Type    : MariaDB
+Target Server Type    : MYSQL
 Target Server Version : 100121
 File Encoding         : 65001
 
-Date: 2017-10-03 14:12:39
+Date: 2017-10-18 17:51:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -154,12 +154,15 @@ CREATE TABLE `zonas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
+  `hora_inicio` time DEFAULT NULL,
+  `hora_fin` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of zonas
 -- ----------------------------
-INSERT INTO `zonas` VALUES ('1', 'Aula 301', null, '2017-09-26 14:31:29', '2017-09-26 14:31:31', null);
-INSERT INTO `zonas` VALUES ('2', 'Aula 302', null, '2017-09-26 14:31:45', '2017-09-26 14:31:47', null);
+INSERT INTO `zonas` VALUES ('1', 'Aula 301', null, '2017-09-26 14:31:29', '2017-09-26 14:31:31', null, '07:00:00', '22:00:00');
+INSERT INTO `zonas` VALUES ('2', 'Aula 302', null, '2017-09-26 14:31:45', '2017-09-26 14:31:47', null, '07:00:00', '22:00:00');
+INSERT INTO `zonas` VALUES ('3', 'Aula 303', null, '2017-10-18 20:19:51', '2017-10-18 20:19:51', null, '06:30:00', '22:30:00');
 SET FOREIGN_KEY_CHECKS=1;
