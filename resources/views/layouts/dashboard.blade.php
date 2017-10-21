@@ -12,9 +12,6 @@
 
     <title>@yield('titulo') - Sensor App</title>
 
-    <!--Morris Chart CSS -->
-    <link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
-
     <!-- App css -->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/core.css')}}" rel="stylesheet" type="text/css" />
@@ -24,6 +21,7 @@
     <link href="{{asset('assets/css/menu.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/jquery.timepicker.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/css/bootstrap-datepicker3.standalone.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/plugins/bootstrap-sweetalert/sweetalert2.css')}}" rel="stylesheet" type="text/css" />
 
     <!-- App css -->
@@ -176,9 +174,8 @@
 <![endif]-->
 <script src="{{asset('assets/plugins/jquery-knob/jquery.knob.js')}}"></script>
 
-<!--Morris Chart-->
-<script src="{{asset('assets/plugins/morris/morris.min.js')}}"></script>
-<script src="{{asset('assets/plugins/raphael/raphael-min.js')}}"></script>
+<!--Chart.js-->
+<script src="{{asset('assets/plugins/chart.js/dist/Chart.js')}}"></script>
 
 <!-- Datatable -->
 <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
@@ -201,6 +198,8 @@
 <script src="{{asset('assets/js/livestamp.js')}}"></script>
 
 <script src="{{asset('assets/js/jquery.timepicker.js')}}"></script>
+<script src="{{asset('assets/js/bootstrap-datepicker.min.js')}}"></script>
+<script src="{{asset('assets/js/bootstrap-datepicker.es.min.js')}}"></script>
 
 <script src="{{asset('assets/js/arduino.js')}}"></script>
 

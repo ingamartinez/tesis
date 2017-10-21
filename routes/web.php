@@ -56,6 +56,5 @@ Route::middleware(['role:admin|super-admin','auth'])->group(function () {
 
 Route::resource('monitoreo','MonitoreoController');
 
-Route::post('prueba', function (\Illuminate\Http\Request $request) {
-    return $request->all();
-});
+Route::get('reporte-zona','ReporteController@reporteZona')->name('reporte.zona');
+Route::resource('reporte','ReporteController');

@@ -6,7 +6,7 @@
     </li>
 
     <li>
-        <a href="{{url('#')}}" class="waves-effect"><i class="zmdi zmdi-check-all"></i> <span> Reportes </span> </a>
+        <a href="{{url('reporte')}}" class="waves-effect"><i class="zmdi zmdi-check-all"></i> <span> Reportes </span> </a>
     </li>
 
 

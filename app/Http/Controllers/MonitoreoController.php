@@ -6,6 +6,7 @@ use App\Arduino;
 use App\Events\ActualizarArduinoEvent;
 use App\Events\AlertaArduinoEvent;
 use App\Mail\OrderShipped;
+use App\Registro;
 use App\Zona;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -47,6 +48,14 @@ class MonitoreoController extends Controller
         $now = new Carbon();
         $now->toTimeString();
 
+        $registro = new Registro();
+        $registro->luz = $request->luz;
+        $registro->temperatura = $request->temperatura;
+        $registro->sonido = $request->sonido;
+        $registro->movimiento = $request->movimiento;
+        $registro->mac = $request->id;
+        $registro->zona = $arduino->zona->nombre;
+
         if(($now->toTimeString() > $arduino->zona->hora_fin) || ($now->toTimeString() < $arduino->zona->hora_inicio)){
             if ($request->luz >=20 || $request->sonido >= 40 || $request->temperatura <=25 || $request->movimiento == "SI"){
 
@@ -56,8 +65,11 @@ class MonitoreoController extends Controller
                     $arduino->zona->nombre,
                     'Alerta')
                 );
+
+                $registro->alert = true;
             }
         }
+        $registro->save();
         return $request->all();
     }
 }
