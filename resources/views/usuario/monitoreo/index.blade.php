@@ -31,7 +31,7 @@
                                     </div>
 
                                     <div class="widget-detail-1">
-                                        <h2 style="padding-top: 25px" class="m-b-0"> Luz (LUX) </h2>
+                                        <h2 style="padding-top: 25px" class="m-b-0"> Intensidad de Luz (LUX) </h2>
                                     </div>
                                 </div>
                                 <br>
@@ -55,7 +55,7 @@
                                                data-thickness=".2" id="arduino-sonido-{{$arduino->id}}"/>
                                     </div>
                                     <div class="widget-detail-1">
-                                        <h2 style="padding-top: 25px" class="m-b-0"> Sonido (dB) </h2>
+                                        <h2 style="padding-top: 25px" class="m-b-0"> Nivel de Sonido (dB) </h2>
                                     </div>
                                 </div>
                                 <br>

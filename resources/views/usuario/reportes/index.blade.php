@@ -31,9 +31,9 @@
                     </div>
 
                     <div class="form-group col-lg-4">
-                        <label for="tipo_rango" class="control-label">Zona</label>
+                        <label for="tipo_rango" class="control-label">Paso de Tiempo</label>
                         <select id="tipo_rango" name="tipo_rango" class="form-control" required>
-                            <option value="">Escoge un tipo de rango</option>
+                            <option value="">Escoja una serie</option>
                             <option value="5min">5 Minutos</option>
                             <option value="1h">1 Hora</option>
                             <option value="2h">5 Horas</option>
@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="form-group col-lg-4">
-                        <label for="fecha" class="control-label">Rango</label>
+                        <label for="fecha" class="control-label">Fecha</label>
                         <div class="input-group input-daterange">
                             <input type="text" class="form-control" name="inicio" data-date="" required>
                             <div class="input-group-addon">hasta</div>
