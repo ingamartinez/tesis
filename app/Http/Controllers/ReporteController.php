@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Registro;
 use App\Zona;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -20,8 +21,7 @@ class ReporteController extends Controller
         $db="";
         switch ($request->tipo_rango){
             case '5min':
-                $db = DB::table('registro')
-                    ->where('zona','=',$request->zona)
+                $db = Registro::where('zona','=',$request->zona)
                     ->whereBetween('created_at', [Carbon::parse(str_replace('/', '-', $request->inicio))->startOfDay(), Carbon::parse(str_replace('/', '-', $request->fin))->endOfDay()])
                     ->whereRaw('minute(created_at)%5 = 0')
                     ->get();
@@ -48,8 +48,7 @@ class ReporteController extends Controller
             break;
 
             case '1h':
-                $db = DB::table('registro')
-                    ->where('zona','=',$request->zona)
+                $db = Registro::where('zona','=',$request->zona)
                     ->whereBetween('created_at', [Carbon::parse(str_replace('/', '-', $request->inicio))->startOfDay(), Carbon::parse(str_replace('/', '-', $request->fin))->endOfDay()])
                     ->whereRaw('hour(created_at)%1 = 0')
                     ->get();
@@ -75,8 +74,7 @@ class ReporteController extends Controller
                 });
             break;
             case '5h':
-                $db = DB::table('registro')
-                    ->where('zona','=',$request->zona)
+                $db = Registro::where('zona','=',$request->zona)
                     ->whereBetween('created_at', [Carbon::parse(str_replace('/', '-', $request->inicio))->startOfDay(), Carbon::parse(str_replace('/', '-', $request->fin))->endOfDay()])
                     ->whereRaw('hour(created_at)%5 = 0')
                     ->get();
