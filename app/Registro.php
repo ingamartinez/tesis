@@ -13,4 +13,12 @@ class Registro extends Model
 
     protected $dates = ['deleted_at'];
 
+    public function getMovimientoAttribute($value)
+    {
+    	if ($value === "SI") {
+    		return 1;
+    	}elseif ($value === "NO") {
+    		return 0;
+    	}        
+    }
 }
